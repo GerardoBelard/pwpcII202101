@@ -14,6 +14,11 @@ module.exports = {
         // 6. Servidor desarrollo, ruta path publico 
         publicPath: '/'
     },
+    devServer: {
+        static: path.join(__dirname, 'public'),
+        port: 8085,
+        host: 'localhost'
+    },
     module: {
         rules: [
             {
