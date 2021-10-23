@@ -1,22 +1,16 @@
-var express = require('express');
-var router = express.Router();
+// Importando el router de home
+import homeRouter from './home';
+import userRouter from './users';
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+// router.use('/', homeRouter);
+// router.use('/users', userRouter);
+const addRoutes = (app) => {
+  app.use('/', homeRouter);
+  app.use('/users', userRouter);
+  return app;
+};
 
-  res.render('index', { title: 'Express', author:'Gerardo', appName: 'Webapp', Company: 'Awsome Software'});
-
-});
-
-/* Agregando nueva ruta */
-router.get('/greeting', function(req , res, next){
-  res.status(200).json({message:'Que pasa chaval'})
-})
-
-/* Agregando nueva ruta */
-router.get('/Reto', function(req , res, next){
-  res.send('Reto completado')
-})
-
-
-module.exports = router;
+export default {
+  addRoutes,
+};
