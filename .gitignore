@@ -1,6 +1,6 @@
-#Ignorando los modulos
+#ignorando
 node_modules
 dist-server
-#ignorando los archivos de logs
+#ignorando los archivos logs 
 logs
 *.logs
