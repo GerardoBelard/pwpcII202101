@@ -1,17 +1,21 @@
-const index = function(req, res)  {
+const index = (req, res) => {
+  res.render('home/index', {
+    title: 'ProjNotes',
+  });
+};
 
-        res.render('index', { 
-            title: 'ProjNotes', 
-        
-        });
-      
-      };
-const greetin = function(req , res) {
-    res.status(200).json
-    ({message:'Que pasa chaval'});
-  };
+const greeting = (req, res) => {
+  res.status(200).json({
+    message: 'Hola campeon FullStack',
+  });
+};
 
-export default{
-    index,
-    greeting,
+const about = (req, res) => {
+  res.render('home/about', { title: 'Acerca ProjNotes' });
+};
+
+export default {
+  index,
+  greeting,
+  about,
 };
