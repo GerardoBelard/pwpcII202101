@@ -19,5 +19,3 @@ router.get('/about', homeController.about);
 // Exportando router de subritas
 // para controlador home
 export default router;
-
-
