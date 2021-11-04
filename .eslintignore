@@ -1,3 +1,2 @@
-# Ignora configuradores
-webpack.config.js
-webpack.dev.config.js
+#ignorar archivos de configuración
+*.config.js

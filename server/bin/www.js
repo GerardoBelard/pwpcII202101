@@ -1,14 +1,33 @@
 #!/usr/bin/env node
 import winston from '@server/config/winston';
-
+// Importando configuraciones de aplicación
+import configKeys from '@server/config/configKeys';
 /**
  * Module dependencies.
  */
-import Debug from 'debug';
-import http from 'http';
-import app from '../app';
 
-const debug = Debug('debug')('projnotes:server');
+import http from 'http';
+import Debug from 'debug';
+import app from '../app';
+// const app = require('../app');
+const debug = Debug('pilacompleta2:server');
+// const http = require('http');
+
+/**
+ * Create HTTP server.
+ */
+
+const server = http.createServer(app);
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  const addr = server.address();
+  const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
+  debug(`Listening on ${bind}`);
+}
 
 /**
  * Normalize a port into a number, string, or false.
@@ -34,11 +53,8 @@ function normalizePort(val) {
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(configKeys.port || '3000');
 app.set('port', port);
-
-const bind = typeof port === 'string' ? `Pipe ${port}` : `Port ${port}`;
-
 /**
  * Event listener for HTTP server "error" event.
  */
@@ -48,10 +64,12 @@ function onError(error) {
     throw error;
   }
 
+  const bind = typeof port === 'string' ? `Pipe ${port}` : `Port ${port}`;
+
   // handle specific listen errors with friendly messages
   switch (error.code) {
     case 'EACCES':
-      winston.error(`${bind} requires elevated privileges`);
+      winston.error(`${bind} requires elevated privileges `);
       process.exit(1);
       break;
     case 'EADDRINUSE':
@@ -61,23 +79,6 @@ function onError(error) {
     default:
       throw error;
   }
-}
-
-/**
- * Create HTTP server.
- */
-
-const server = http.createServer(app);
-
-/**
- * Event listener for HTTP server "listening" event.
- */
-
-function onListening() {
-  const addr = server.address();
-  const bindAdr =
-    typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
-  debug(`Listening on ${bindAdr}`);
 }
 
 /**

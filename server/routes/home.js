@@ -1,21 +1,20 @@
-// Importar Router
+// Importando Router
 import { Router } from 'express';
+// importando al controlador home
 
-// Importando al controlador Home
-import homeController from '@server/controllers/homeController';
+import homeController from '@server/controllers/homeControllers';
 
-// Creando Instancia de Router
+// Creando la instancia de un enrutador
 const router = new Router();
 
-// Get '/'
+// GET
 router.get(['/', '/index'], homeController.index);
 
-// Get '/greeting'
+// GET /greeting
 router.get('/greeting', homeController.greeting);
 
-// Get '/about'
+// GET /about
 router.get('/about', homeController.about);
 
-// Exportando router de subritas
-// para controlador home
+// Exportando el router que maneja las subrutas para el controlador
 export default router;
