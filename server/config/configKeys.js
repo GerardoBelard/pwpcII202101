@@ -11,3 +11,4 @@ export default {
   ip: process.env.IP,
   databaseUrl: process.env.DATABASE_URL,
 };
+

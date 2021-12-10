@@ -4,24 +4,33 @@ const index = (req, res) => {
   res.send('Respondiendo a "/Projects/index"');
 };
 
-//  GET "/projects/add"
-// Enviar el formulario para crear nuevas ideas
-// de Proyectos
+// GET "/projects/add"
 const add = (req, res) => {
-  res.send('Respondiendo a "/projects/addView"');
+  res.render('project/addView');
 };
 
 // POST "/projects/add"
-// Procesa la informacion del formulario
-// req, res es el controlador de la funcion flecha
 const addPost = (req, res) => {
-  // Rescatando la informacion del formulario
-  // Apartados del formulario
-  const { name, description } = req.body;
-  res.json({
-    name,
-    description,
-  });
+  // Rescatando la información del formulario
+  const { validData, errorData } = req;
+  // Creando view models
+  let project = {};
+  let errorModel = {};
+  // Verificando errores
+  if (errorData) {
+    // Rescatar objeto validado
+    project = errorData.value;
+    // Usar reduce y generar errores a partir de inner
+    errorModel = errorData.inner.reduce((prev, curr) => {
+      // Crear variable temp 
+      const newVal = prev;
+      newVal[`${curr.path}Error`] = curr.message;
+      return newVal;
+    }, {});
+  } else {
+    project = validData;
+  }
+  res.render('project/addView', { project, errorModel });
 };
 
 // Pendiente por programar

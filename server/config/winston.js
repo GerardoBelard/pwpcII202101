@@ -32,7 +32,7 @@ const options = {
     level: 'info',
     filename: `${appRoot}/server/logs/infos.log`,
     handleExceptions: true,
-    maxsize: 5242880, // 5MG
+    maxsize: 5242880, //5MG
     maxFiles: 5,
     format: myFileFormat,
   },
